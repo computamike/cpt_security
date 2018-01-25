@@ -30,7 +30,11 @@ class Cpt_security_Deactivator {
 	 * @since    1.0.0
 	 */
 	public static function deactivate() {
-
+		$role = get_role( 'administrator' );
+	    $capabilities = security_utilities::compile_post_type_capabilities('study', 'studies');
+		foreach ($capabilities as $capability) {
+			$role->remove_cap( $capability );
+		}
 	}
 
 }

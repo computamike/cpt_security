@@ -9,7 +9,7 @@
  * @package    Cpt_security
  * @subpackage Cpt_security/includes
  */
-
+require_once realpath( __DIR__ . '/class-security-utilities.php' );
 /**
  * Fired during plugin activation.
  *
@@ -31,6 +31,11 @@ class Cpt_security_Activator {
 	 */
 	public static function activate() {
 
+		$role = get_role( 'administrator' );
+		    $capabilities = security_utilities::compile_post_type_capabilities('study', 'studies');
+		    foreach ($capabilities as $capability) {
+		        $role->add_cap( $capability );
+		    }
 	}
 
 }

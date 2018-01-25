@@ -10,6 +10,8 @@
  * @subpackage Cpt_security/public
  */
 
+require_once realpath( __DIR__ . '/../includes/class-Inflect.php' );
+require_once realpath( __DIR__ . '/../includes/class-security-utilities.php' );
 /**
  * The public-facing functionality of the plugin.
  *
@@ -54,19 +56,36 @@ class Cpt_security_Public {
 
 	}
 
+
 	/**
 	 * Register the Studies custom post type.
 	 */
 	public function register_studies(){
 		$type = 'study';
-		$label = 'Studies';
+		$i = new Inflect();
+
+		$singular = $i->singularize($type);
+		$plural   = $i->pluralize($type);
+
+		$labels =  security_utilities::xcompile_post_type_labels(ucfirst($singular), ucfirst($plural));
+		$capabilities = security_utilities::compile_post_type_capabilities($singular, $plural);
+		$supports = ['title', 'editor', 'revisions', 'page-attributes', 'thumbnail'];
 		$arguments = [
+			'capabilities' => $capabilities,
+			'show_in_rest' => true, // Enable the REST API
+			'hierarchical' => false, // Do not use hierarchy
 			'public' => true, // Allow access to post type
 			'description' => 'Case studies for portfolio.', // Add a description
-			'label'  => $label // Set the primary label
+			'supports' => $supports, // Apply supports
+			'menu_icon' => 'dashicons-desktop', // Set icon
+			'labels'  => $labels // Set the primary labels
 		];
 		register_post_type( $type, $arguments);
+		security_utilities::post_message(ucfirst($singular), ucfirst($plural));
+		security_utilities::bulk_post_message(ucfirst($singular), ucfirst($plural));
+
 	}
+
 
 
 	/**
