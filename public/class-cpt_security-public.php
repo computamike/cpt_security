@@ -55,6 +55,21 @@ class Cpt_security_Public {
 	}
 
 	/**
+	 * Register the Studies custom post type.
+	 */
+	public function register_studies(){
+		$type = 'study';
+		$label = 'Studies';
+		$arguments = [
+			'public' => true, // Allow access to post type
+			'description' => 'Case studies for portfolio.', // Add a description
+			'label'  => $label // Set the primary label
+		];
+		register_post_type( $type, $arguments);
+	}
+
+
+	/**
 	 * Register the stylesheets for the public-facing side of the site.
 	 *
 	 * @since    1.0.0

@@ -67,8 +67,8 @@ class Cpt_security {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'PLUGIN_NAME_VERSION' ) ) {
-			$this->version = PLUGIN_NAME_VERSION;
+		if ( defined( 'CPT_SECURITY_VERSION' ) ) {
+			$this->version = CPT_SECURITY_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
@@ -172,6 +172,7 @@ class Cpt_security {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action( 'init', $plugin_public, 'register_studies' );
 
 	}
 
