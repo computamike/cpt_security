@@ -1,6 +1,7 @@
 # Custom Post Type Security
 
 __UPDATE : This issue is now potentially resolved__
+### When attempting to write the studies WordPress was performing a check against `current_user_can` for `edit_post`, and this was returning a false.  Even with `edit_post` capability set, it was failing to map this correctly.  Setting `'map_meta_cap' => true,` when registering the custom post type resolved this issue.
 
 This project is a plugin which installs a custom post type - based on the tutorial [here](https://typerocket.com/ultimate-guide-to-custom-post-types-in-wordpress/).
 
