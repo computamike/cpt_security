@@ -78,7 +78,8 @@ class Cpt_security_Public {
 			'description' => 'Case studies for portfolio.', // Add a description
 			'supports' => $supports, // Apply supports
 			'menu_icon' => 'dashicons-desktop', // Set icon
-			'labels'  => $labels // Set the primary labels
+			'labels'  => $labels, // Set the primary labels
+			'map_meta_cap' => true,
 		];
 		register_post_type( $type, $arguments);
 		security_utilities::post_message(ucfirst($singular), ucfirst($plural));
